@@ -1,4 +1,4 @@
 tox
 pytest
-pylama
+pylama==7.7.1
 pyre-check
