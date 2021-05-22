@@ -1,0 +1,4 @@
+tox
+pytest
+pylama
+pyre-check

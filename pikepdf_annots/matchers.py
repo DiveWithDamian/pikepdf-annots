@@ -1,3 +1,6 @@
+"""
+pikepdf_annots - PikePDF helper utilities
+
 MIT License
 
 Copyright (c) 2021 Damian Zaremba
@@ -19,3 +22,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+"""
+from dataclasses import dataclass
+from decimal import Decimal
+from typing import Optional, Union, List
+
+
+@dataclass(repr=True, frozen=True)
+class AnnotationMatcher:
+    """Name of annotation to match."""
+
+    name: Union[List[Decimal], str]
+    human_name: Optional[str] = None
+
+    def __post_init__(self) -> None:
+        if self.human_name is None:
+            object.__setattr__(self, 'human_name', self.name)
+
+    def matches(self, annotation) -> bool:
+        """Compare our instance to the specified annotation."""
+        # Text annotation
+        if "/T" in annotation:
+            return annotation.T == self.name
+        # Position annotation
+        return annotation.Rect == self.name
