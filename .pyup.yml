@@ -1,0 +1,7 @@
+update: all
+pin: True
+search: True
+close_prs: True
+requirements:
+  - requirements.txt
+  - requirements-dev.txt

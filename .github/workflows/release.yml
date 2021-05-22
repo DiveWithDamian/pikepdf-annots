@@ -1,0 +1,31 @@
+name: Release
+on: { push: { tags: [ 'v*' ] } }
+jobs:
+  github:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Create GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+  pypi:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with: { python-version: '3.9' }
+      - name: Run sdist
+        run: python setup.py sdist
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          skip_existing: true
+          verbose: true
+          password: ${{ secrets.PYPI_API_TOKEN }}

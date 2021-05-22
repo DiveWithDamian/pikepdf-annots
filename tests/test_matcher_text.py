@@ -1,3 +1,6 @@
+"""
+pikepdf_annotations - PikePDF helper utilities
+
 MIT License
 
 Copyright (c) 2021 Damian Zaremba
@@ -19,3 +22,37 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+"""
+from pikepdf_annots import AnnotationMatcher
+
+
+def test_text_matcher_success():
+    class BasicTextAnnotationObject:
+        def __getattr__(self, item):
+            if item == "T":
+                return "First Name"
+            return None
+
+        def __contains__(self, item):
+            if item == "/T":
+                return True
+            return False
+
+    matcher = AnnotationMatcher("First Name")
+    assert matcher.matches(BasicTextAnnotationObject()) is True
+
+
+def test_text_matcher_failure():
+    class BasicTextAnnotationObject:
+        def __getattr__(self, item):
+            if item == "T":
+                return "Example Name"
+            return None
+
+        def __contains__(self, item):
+            if item == "/T":
+                return True
+            return False
+
+    matcher = AnnotationMatcher("First Name")
+    assert matcher.matches(BasicTextAnnotationObject()) is False

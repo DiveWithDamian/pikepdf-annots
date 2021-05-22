@@ -1,0 +1,4 @@
+{
+  "source_directories": ["pikepdf_annots"],
+  "strict": false
+}

@@ -1,3 +1,6 @@
+'''
+pikepdf_annots - PikePDF helper utilities
+
 MIT License
 
 Copyright (c) 2021 Damian Zaremba
@@ -19,3 +22,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+'''
+from .forms import EditableForm
+from .matchers import AnnotationMatcher
+
+__version__ = '0.0.1'
+__all__ = [EditableForm, AnnotationMatcher]
