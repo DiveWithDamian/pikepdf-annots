@@ -1,4 +1,4 @@
-tox==3.24.4
+tox==3.24.5
 pytest==6.2.5
 pylama==7.7.1
 pyre-check==0.9.6
