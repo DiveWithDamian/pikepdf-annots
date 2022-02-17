@@ -1,1 +1,1 @@
-pikepdf==3.2.0
+pikepdf==5.0.0
