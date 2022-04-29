@@ -23,7 +23,7 @@ jobs:
         run: pip install tox
       - name: Run pylama
         run: tox -e pylama
-  pyre:
+  mypy:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -32,5 +32,5 @@ jobs:
         with: { python-version: '3.9' }
       - name: Install dependencies
         run: pip install tox
-      - name: Run pyre
-        run: tox -e pyre
+      - name: Run mypy
+        run: tox -e mypy

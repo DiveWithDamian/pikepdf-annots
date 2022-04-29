@@ -28,15 +28,19 @@ from types import TracebackType
 from typing import Set, Dict, Optional, Type, Union
 
 import pikepdf
+from pikepdf import Pdf  # type: ignore
+from pikepdf.objects import Name
+
+from .matchers import AnnotationMatcher
 
 
 class EditableForm:
     """Editable form using PikePDF."""
-    _pdf = None
+    _pdf: Pdf
 
     def get_annotations(self) -> Dict[int, Set[str]]:
         """Get all annotation names."""
-        annotations = {}
+        annotations: Dict[int, Set[str]] = {}
         for n, page in enumerate(self._pdf.pages):
             annotations[n] = set()
             for annotation in page.Annots:
@@ -48,8 +52,9 @@ class EditableForm:
                         annotations[n].add(name)
         return annotations
 
-    def update_annotation(self, page: int,
-                          matcher,
+    def update_annotation(self,
+                          page: int,
+                          matcher: AnnotationMatcher,
                           value: Union[bool, str]) -> None:
         """Update annotations."""
         for annotation in self._pdf.pages[page].Annots:
@@ -61,10 +66,10 @@ class EditableForm:
                                  "/5", "/6", "/7", "/8", "/9",
                                  "/Yes"}:
                         if flag in annotation.AP.N:
-                            annotation.AS = pikepdf.Name(flag)  # pyre-ignore
+                            annotation.AS = Name(flag)
 
                 elif value is False:
-                    annotation.AS = pikepdf.Name("/Off")  # pyre-ignore
+                    annotation.AS = Name("/Off")
 
                 # String
                 else:
@@ -91,9 +96,10 @@ class EditableForm:
     def __exit__(self,
                  exc_type: Optional[Type[BaseException]],
                  exc_val: Optional[BaseException],
-                 exc_tb: Optional[TracebackType]) -> bool:
+                 exc_tb: Optional[TracebackType]) -> None:
         """Context destructor."""
-        return self._pdf.close()
+        if self._pdf:
+            self._pdf.close()
 
     def export(self, path: PosixPath) -> None:
         """Export edited PDF to disk."""

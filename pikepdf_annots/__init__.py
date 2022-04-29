@@ -27,4 +27,7 @@ from .forms import EditableForm
 from .matchers import AnnotationMatcher
 
 __version__ = '0.0.1'
-__all__ = [EditableForm, AnnotationMatcher]
+__all__ = [
+    "EditableForm",
+    "AnnotationMatcher"
+]

@@ -23,9 +23,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-from dataclasses import dataclass
 from decimal import Decimal
 from typing import Optional, Union, List
+
+from dataclasses import dataclass
+from pikepdf.objects import Object  # type: ignore
 
 
 @dataclass(repr=True, frozen=True)
@@ -39,10 +41,10 @@ class AnnotationMatcher:
         if self.human_name is None:
             object.__setattr__(self, 'human_name', self.name)
 
-    def matches(self, annotation) -> bool:
+    def matches(self, annotation: Object) -> bool:
         """Compare our instance to the specified annotation."""
         # Text annotation
         if "/T" in annotation:
-            return annotation.T == self.name
+            return bool(annotation.T == self.name)
         # Position annotation
-        return annotation.Rect == self.name
+        return bool(annotation.Rect == self.name)
