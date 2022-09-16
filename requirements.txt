@@ -1,1 +1,1 @@
-pikepdf==6.0.0.post2
+pikepdf==6.0.1
