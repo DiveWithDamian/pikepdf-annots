@@ -1,4 +1,4 @@
-tox==4.4.2
+tox==4.4.3
 pytest==7.2.1
 pylama==8.4.1
 mypy==0.991
