@@ -2,7 +2,7 @@ name: Release
 on: { push: { tags: [ 'v*' ] } }
 jobs:
   github:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Create GitHub release
         uses: actions/create-release@v1
@@ -14,7 +14,7 @@ jobs:
           draft: false
           prerelease: false
   pypi:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.x
