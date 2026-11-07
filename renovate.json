@@ -1,9 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    "group:allNonMajor"
+    "config:recommended"
   ],
   "automerge": true,
-  "automergeStrategy": "rebase"
+  "automergeStrategy": "rebase",
+  "packageRules": [
+    {
+      "description": "Group CI updates",
+      "matchManagers": ["github-actions"],
+      "groupName": "CI dependencies"
+    },
+    {
+      "description": "Group Python updates",
+      "matchManagers": ["poetry", "pep621", "pip_requirements", "pyenv"],
+      "groupName": "Python dependencies"
+    }
+  ]
 }
