@@ -4,9 +4,9 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up Python 3.x
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with: { python-version: '3.13' }
       - name: Install dependencies
         run: pip install tox
@@ -15,9 +15,9 @@ jobs:
   pylama:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up Python 3.x
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with: { python-version: '3.13' }
       - name: Install dependencies
         run: pip install tox
@@ -26,9 +26,9 @@ jobs:
   mypy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up Python 3.x
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with: { python-version: '3.13' }
       - name: Install dependencies
         run: pip install tox
