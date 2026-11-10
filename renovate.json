@@ -16,5 +16,8 @@
       "matchManagers": ["poetry", "pep621", "pip_requirements", "pyenv"],
       "groupName": "Python dependencies"
     }
-  ]
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  }
 }
